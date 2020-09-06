@@ -143,11 +143,11 @@ function draw(){
         }
         
 
-        if(GroupGift.get(i) !== null && GroupGift.isTouching(edges[3])){
+        /*if(GroupGift.get(i) !== null && GroupGift.isTouching(edges[3])){
             GroupGift.get(i).destroy();
             lives--
             sound2.play();
-        }
+        }*/
         if( lives <= 0 || score === 10500){
             gameState="end";
             sound6.play();
