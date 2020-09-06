@@ -34,7 +34,7 @@ function preload(){
 }
     
 function setup(){
-    createCanvas(displayWidth-20,displayHeight-20);
+    createCanvas(400,400);
     edges=createEdgeSprites();
 
     ground= createSprite(width/2,height/2,width,height)
@@ -317,10 +317,10 @@ function touchMoved(){
     for(var i = 0;i<myTouch.length;i++){
       console.log("myTouch length "+myTouch.length);
       if(myTouch.length>1 && myTouch[i][0]<myTouch[i+1][0]){
-        slider.x = slider.x-20;
+        slider.x = slider.x-40;
       }
       else{
-        slider.x = slider.x+2222222220;
+        slider.x = slider.x+40;
       }
     }
     
