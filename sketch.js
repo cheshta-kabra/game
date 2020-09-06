@@ -317,10 +317,10 @@ function touchMoved(){
     for(var i = 0;i<myTouch.length;i++){
       console.log("myTouch length "+myTouch.length);
       if(myTouch.length>1 && myTouch[i][0]<myTouch[i+1][0]){
-        slider.x = slider.x-1;
+        slider.x = slider.x-40;
       }
       else{
-        slider.x = slider.x+1;
+        slider.x = slider.x+40;
       }
     }
     
