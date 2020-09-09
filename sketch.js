@@ -34,7 +34,7 @@ function preload(){
 }
     
 function setup(){
-    createCanvas(400,400);
+    createCanvas(500,500);
     edges=createEdgeSprites();
 
     ground= createSprite(width/2,height/2,width,height)
@@ -52,13 +52,13 @@ function setup(){
     helicopter= createSprite(120,60)
     helicopter.addImage("helicopterforward",helicopterImg);
     helicopter.addImage("helicopterbackward",helicopterImg2);
-    helicopter.scale=0.50;
+    helicopter.scale=0.25;
     helicopter.velocityX=3;
 
-    slider = createSprite(displayWidth/2,displayHeight-40,150,20)
+    slider = createSprite(width,height-15,150,20)
     slider.addImage("S1",slider_1);
     slider.addImage("S2",slider_2);
-    slider.scale=0.75;
+    slider.scale=0.25;
 
     //slider.shapeColor="red";
     GroupGift=new Group()
@@ -72,10 +72,10 @@ function draw(){
         stroke("black");
     fill("red");
     strokeWeight(10);
-    textSize(40);
-        text("WELCOME",displayWidth/2-50,displayHeight/2-50);
-        text("Press SPACE to start the game",displayWidth/3,displayHeight/3+270);
-        text("Press Left and Right arrow keys to move the slider",displayWidth/4,displayHeight/4+250);
+    textSize(20);
+        text("WELCOME",width/2-50,height/2-50);
+        text("Press SPACE to start the game",100,350);
+        text("Press Left and Right arrow keys to move the slider",3,300);
         helicopter.visible=false;
         slider.visible=false;
         if(keyDown("space")){
@@ -143,11 +143,11 @@ function draw(){
         }
         
 
-        /*if(GroupGift.get(i) !== null && GroupGift.isTouching(edges[3])){
+        if(GroupGift.get(i) !== null && GroupGift.isTouching(edges[3])){
             GroupGift.get(i).destroy();
             lives--
             sound2.play();
-        }*/
+        }
         if( lives <= 0 || score === 10500){
             gameState="end";
             sound6.play();
@@ -158,11 +158,11 @@ function draw(){
        if(score>=1500){
         ground.changeImage("noonBG",background_1);
         GroupGift.setVelocityYEach(3.8);
-        ground.scale=3;
+        ground.scale=1;
     }
     if(score>=3000){
         ground.changeImage("eveningBG",background_2);
-        ground.scale=3.7;
+        ground.scale=0.75;
         GroupGift.setVelocityYEach(4.5);
 
         frequency=Math.round(random(40,80))
@@ -175,7 +175,7 @@ function draw(){
     if(score>=4500){
         ground.changeImage("nightBG",background_3);
         GroupGift.setVelocityYEach(5);
-        ground.scale=2.8;
+        ground.scale=0.78;
 
         frequency=Math.round(random(70,120))
         if(frameCount % frequency === 0){
@@ -188,7 +188,7 @@ function draw(){
             //console.log(score)
             ground.changeImage("playBG",backgroundImg);
             GroupGift.setVelocityYEach(6.5);
-            ground.scale=2.8;
+            ground.scale=0.78;
     
             frequency=Math.round(random(100,150))
             if(frameCount % frequency === 0){
@@ -211,7 +211,7 @@ function draw(){
 }
    else if( gameState === "end"){
        ground.changeImage("endBG",endBackground);
-       ground.scale=3;
+       ground.scale=0.75;
 
        stroke("white"); 
        fill("blue");
@@ -231,7 +231,7 @@ function draw(){
        ground.changeImage("serveBG",serveBackground)  
        gameState="serve";
        helicopter.x=120;
-       slider.x=displayWidth/2;
+       slider.x=width/2;
        GroupGift.destroyEach();
        lives=3;
        score=0;
@@ -247,7 +247,7 @@ function draw(){
     strokeWeight(3);
     textSize(20);
     text("SCORE : "+score,30,30);
-    text("LIVES : "+lives,displayWidth-115,30);
+    text("LIVES : "+lives,width-115,30);
     }
     //console.log(gameState)
 }
@@ -265,7 +265,7 @@ function spawnGift(){
     //console.log("spawnGift")
        var gift= createSprite(helicopter.x,65);
         gift.addImage(giftImg);
-        gift.scale=0.2;
+        gift.scale=0.1;
         //var rand=Math.round(random(1,3))
         gift.velocityY=3;
         gift.lifeTime=height/3+20
@@ -291,47 +291,28 @@ function getVelocity(){
 }
 
 
-function touchMoved(){
+function touchStarted(){
+    console.log("start",mouseX) 
+    return false;
+  }
+  
+  function touchMoved(){
     //stroke(255, 0, 0);
     //line(touchX, touchY, ptouchX, ptouchY);
-    console.log("touchMoved");
     
-    pos = [touchX,touchY];
-    if(first){
-      temp_pos = pos;
-      myTouch.push(pos)
-      console.log("touch pos first "+pos);
-     // pos=[];
-      first = false;
-    }
-    
-    
-    if(pos[0]!==temp_pos[0]){
-      console.log("abc");
-    myTouch.push(pos)
-    temp_pos = pos;
-    console.log("touch pos "+pos);
-    pos=[];
-    }
-    
-    for(var i = 0;i<myTouch.length;i++){
-      console.log("myTouch length "+myTouch.length);
-      if(myTouch.length>1 && myTouch[i][0]<myTouch[i+1][0]){
-        slider.x = slider.x-40;
-      }
-      else{
-        slider.x = slider.x+40;
-      }
-    }
-    
-    
-    
+    console.log("touchmoved mouse",mouseX) 
+    slider.x = mouseX
+    //slider.y = mouseY
+    return false;
   }
   
   function touchEnded(){
     //stroke(0, 0, 255);
     //line(touchX, touchY, ptouchX, ptouchY);
-    console.log("touchEnded");
-    
+   
+    console.log("touchEnded touch",touchX)
+    console.log("touchend",mouseX)
+    slider.x = mouseX
+    //slider.y = mouseY
+    return false;
   }
-
