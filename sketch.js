@@ -3,7 +3,7 @@ var gift,helicopter,backgroundImg,slider,helicopterImg,giftImg,ground,helicopter
 var edges;
 var background_1,background_2,background_3,slider_1,slider_2,sound1,sound2,sound3,sound4,sound5,sound7,sound6;
 var GroupGift,rand;
-var score=0;
+var score=4500;
 var lives=3;
 var frequency;
 var gameState="serve";
@@ -162,7 +162,7 @@ function draw(){
     }
     if(score>=3000){
         ground.changeImage("eveningBG",background_2);
-        ground.scale=0.75;
+        ground.scale=2;
         GroupGift.setVelocityYEach(4.5);
 
         frequency=Math.round(random(40,80))
@@ -175,7 +175,7 @@ function draw(){
     if(score>=4500){
         ground.changeImage("nightBG",background_3);
         GroupGift.setVelocityYEach(5);
-        ground.scale=0.78;
+        ground.scale=1.6;
 
         frequency=Math.round(random(70,120))
         if(frameCount % frequency === 0){
@@ -188,7 +188,7 @@ function draw(){
             //console.log(score)
             ground.changeImage("playBG",backgroundImg);
             GroupGift.setVelocityYEach(6.5);
-            ground.scale=0.78;
+            //ground.scale=1;
     
             frequency=Math.round(random(100,150))
             if(frameCount % frequency === 0){
